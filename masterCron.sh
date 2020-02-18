@@ -9,7 +9,7 @@ echo "Cron job log file cleanup is successfull ..."
 gitUserName=ruhan09
 gitUserPwd=*Ruhan09
 
-export VERSION_INFO_FILE=versionInfo
+export VERSION_INFO_FILE="/root/versionInfo"
 > $VERSION_INFO_FILE
 
 clone_git_repo()
