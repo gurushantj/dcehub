@@ -66,6 +66,7 @@ apt install -y npm
 
 build_ganeshaHDFS()
 {
+export DCEFS_VERSION=1.0
 rm -rf /usr/local/dcefs-pkgs
 cd /root/ganeshaHDFS && rm -rf /root/ganeshaHDFS/dce-fs/libs/libdcefs.so && sh build_deb.sh 0 && sh build_deb.sh 1 && cd -
 if [ -f "/root/ganeshaHDFS/dce-fs/libs/libdcefs.so" ]
@@ -76,6 +77,16 @@ else
   exit 1
 fi
 cp /root/ganeshaHDFS/dcefs-pkgs/dcefs*.deb /root/spark-jobserver/deployment/docker-commons/dcefs/
+echo "dcefs="$DCEFS_VERSION >> $VERSION_INFO_FILE
+
+tar xvzf /root/ganeshaHDFS/scripts/libsparkfs-packages-*
+sparkfs=libsparkfs-packages-*
+sparkfs_version=$(echo $sparkfs | awk -F- '{print $3}')
+sparkfs_version1=$(echo $sparkfs | awk -F- '{print $4}')
+sparkfs_version=$sparkfs_version"-"$sparkfs_version1
+dce_vu=$(ls $sparkfs/libdcevu*.deb | head -1)
+dce_vu_version=$(echo $dce_vu | awk -F_ '{print $2}')
+echo "sparkfs_version=$sparkfs_version-$dce_vu_version" >> $VERSION_INFO_FILE
 }
 
 build_fluir_image()
@@ -94,8 +105,22 @@ cd /root/DCEServices/plugins/fluirengine/scripts && sh push-images-to-registry.s
 echo "Pushed image to registry"
 }
 
+build_and_push_dceservice_image()
+{
+echo "Building dceservice image"
+cp $VERSION_INFO_FILE /root/DCEServices/container/dceservices/
+cd /root/DCEServices/container && sh build_image.sh
+git_tag=$(git rev-parse --short=12 HEAD)
+docker tag bigdatalabs/dceservices:$git_tag $localDockerImageRegIp:$localDockerImageRegPort/bigdatalabs/dceservices:$git_tag
+docker push $localDockerImageRegIp:$localDockerImageRegPort/bigdatalabs/dceservices:$git_tag
+docker image remove $localDockerImageRegIp:$localDockerImageRegPort/bigdatalabs/dceservices:$git_tag
+echo "Pushed image to registry"
+}
+
+
 #Function call to the above methods
 build_ganeshaHDFS
 install_fluir_packages
 build_fluir_image
 push_fluir_image  $localDockerImageRegIp $localDockerImageRegPort $dockerImageCommitId
+build_and_push_dceservice_image
