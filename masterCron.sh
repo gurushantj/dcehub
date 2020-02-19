@@ -29,8 +29,7 @@ echo "Building ganeshaHDFS ..."
 clone_git_repo $gitUserName $gitUserPwd
 
 cd /root/spark-jobserver
-#dockerImageCommitId=0.2-$(git log --format="%H" -n 1)
-dockerImageCommitId=0.2-test
+dockerImageCommitId=0.2-$(git log --format="%H" -n 1)
 
 echo "Commit ID: $dockerImageCommitId";
 echo "fluirimageversion=$dockerImageCommitId" >> $VERSION_INFO_FILE
