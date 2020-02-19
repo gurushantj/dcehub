@@ -9,6 +9,9 @@ echo "Cron job log file cleanup is successfull ..."
 gitUserName=ruhan09
 gitUserPwd=*Ruhan09
 
+export VERSION_INFO_FILE="/root/versionInfo"
+> $VERSION_INFO_FILE
+
 clone_git_repo()
 {
 echo "Installed packages ..."
@@ -30,8 +33,7 @@ cd /root/spark-jobserver
 dockerImageCommitId=0.2-test
 
 echo "Commit ID: $dockerImageCommitId";
-
+echo "fluirimageversion=$dockerImageCommitId" >> $VERSION_INFO_FILE
 sh /root/master_cron_script.sh ruhan09 *Ruhan09 $dockerImageCommitId 172.21.75.221 5000
-
 docker rmi $(docker images|grep none)
 #Script has ended
