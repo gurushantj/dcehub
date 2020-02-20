@@ -1,0 +1,307 @@
+package:
+  docker-ce:
+    # required attributes
+    installed: true
+    # optional attributes
+    versions:
+    - 5:19.03.4~3-0~ubuntu-bionic
+
+command:
+  cat /proc/meminfo |grep HugePages_Total:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 16384
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep net.ipv4.tcp_mem:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 8388608	8388608	12582912
+    stderr: []
+    timeout: 30000 # in milliseconds  
+
+  sysctl -a | grep net.ipv4.tcp_rmem:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 4096	87380	12582912 
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep net.ipv4.tcp_wmem:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 4096	87380	12582912
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep net.core.rmem_default:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 87380
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep net.core.wmem_default:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 87380
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep net.core.rmem_max:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 12582912
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep net.core.wmem_max:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 12582912
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep net.ipv4.tcp_window_scaling:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 1
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep vm.swappiness:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 40
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep vm.dirty_background_ratio:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 40
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  sysctl -a | grep vm.dirty_ratio:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 40
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  cat /etc/default/apport:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - enabled=0
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  cat /proc/sys/kernel/core_pattern:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - /fluir_data/core.%e.%p.%h.%t 
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  cat /sys/devices/system/cpu/isolated:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0-3
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libsparkfs-ba-server:amd64:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.4-1
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libsparkfs-dbg:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.4-1
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libsparkfs-dev:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.4-1
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libsparkfs-fuse:amd64:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.4-1
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libsparkfs-utils:amd64:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.4-1
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libsparkfs0:amd64:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.4-1
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libsparkfs0-dbgsym:amd64:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.4-1
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libdcevu-dbg:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.1-5
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libdcevu-dev:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.1-5
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  dpkg -l | grep libdcevu0:amd64:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 0.0.1-5
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  ps -ef | grep dcevu:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 5
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  ps -ef | grep libsparkfs_ba_server_*:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 2
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  df -h | grep dcesparkfs-prod | awk -F ' ' '{print $6}' | head -1:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - /mnt/gluster_mounts/dcesparkfs-prod
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  df -h | grep dcesparkfs-prod-meta | awk -F ' ' '{print $6}' | tail -1:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - /mnt/gluster_mounts/dcesparkfs-prod-meta 
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  cat /etc/fstab | awk 'FNR == 13 {print}':
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 172.26.200.56:/dcesparkfs-prod /mnt/gluster_mounts//dcesparkfs-prod glusterfs acl,rw,defaults,_netdev,x-systemd.automount 0 0
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  cat /etc/fstab | awk 'FNR == 12 {print}':
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - 172.26.200.56:/dcesparkfs-prod-meta /mnt/gluster_mounts//dcesparkfs-prod-meta glusterfs acl,rw,defaults,_netdev,x-systemd.automount 0 0
+    stderr: []
+    timeout: 30000 # in milliseconds
+
+  cat /etc/timezone:
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - Etc/UTC
+    stderr: []
+    timeout: 30000 # in milliseconds  
+
+  cat /etc/docker/daemon.json | jq -c '."insecure-registries"[]':
+    # required attributes
+    exit-status: 0
+    # optional attributes
+    stdout:
+    - "172.26.202.13:5000"
+    stderr: []
+    timeout: 30000 # in milliseconds 
+  
+
