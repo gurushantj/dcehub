@@ -68,6 +68,7 @@ build_ganeshaHDFS()
 {
 export DCEFS_VERSION=1.0
 rm -rf /usr/local/dcefs-pkgs
+dcefs_version_commit=$DCEFS_VERSION-cd /root/ganeshaHDFS && $(git rev-parse --short=12 HEAD)
 cd /root/ganeshaHDFS && rm -rf /root/ganeshaHDFS/dce-fs/libs/libdcefs.so && sh build_deb.sh 0 && sh build_deb.sh 1 && cd -
 if [ -f "/root/ganeshaHDFS/dce-fs/libs/libdcefs.so" ]
 then
@@ -77,7 +78,7 @@ else
   exit 1
 fi
 cp /root/ganeshaHDFS/dcefs-pkgs/dcefs*.deb /root/spark-jobserver/deployment/docker-commons/dcefs/
-echo "dcefs="$DCEFS_VERSION >> $VERSION_INFO_FILE
+echo "dcefs="$dcefs_version_commit >> $VERSION_INFO_FILE
 
 tar xvzf /root/ganeshaHDFS/scripts/libsparkfs-packages-*
 sparkfs=libsparkfs-packages-*
