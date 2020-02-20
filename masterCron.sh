@@ -21,7 +21,7 @@ git clone -b master https://$gitUserName:$gitUserPwd@github.com/DCEngines/ganesh
 git clone -b dce_master https://$gitUserName:$gitUserPwd@github.com/DCEngines/spark_mirror.git
 git clone -b fluir_master https://$gitUserName:$gitUserPwd@github.com/DCEngines/spark-jobserver.git
 git clone -b sp_integration https://$gitUserName:$gitUserPwd@github.com/DCEngines/DCEServices.git
-git clone -b master https://$gitUserName:$gitUserPwd@github.com/DCEngines/DCEngines/splash_mirror.git
+git clone -b master https://$gitUserName:$gitUserPwd@github.com/DCEngines/splash_mirror.git
 echo "Clonined repos ..."
 echo "Building ganeshaHDFS ..."
 }
